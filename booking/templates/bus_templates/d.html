@@ -1,0 +1,1133 @@
+
+
+
+{% extends 'base.html' %}
+{% block buses %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teerdha Bus Search & Trending Offers</title>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+     
+    
+
+
+    /* Custom styles for the bus search form */
+        .bus-search-form {
+    width: 100%; /* Adjust width using percentages */
+    max-width: 800px; /* Limit maximum width */
+    margin: 10px auto;
+   /* Center align content */
+}
+       
+
+        .bus-search-form h1 {
+            color: #2b2827;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-family: 'poppins';
+          
+           
+        }
+
+        .search-inputs {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-inputs label {
+            font-size: 18px;
+            color: #333; /* Changed color */
+        }
+
+        .search-inputs input[type="text"],
+        .search-inputs input[type="date"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            font-size: 16px;
+            outline: none;
+            flex-grow: 1;
+        }
+
+        .search-inputs button {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #e48796; /* Changed color */
+            color: #fff;
+            /* margin-top: 10px; */
+            display: block; /* Moves the button to a new line */
+            
+           
+          
+            
+        }
+
+        .search-inputs button:hover {
+/* Changed hover color */
+            background-color: #e2a9b3;
+        }
+
+        .arrow-button {
+            font-size: 24px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            transition: transform 0.3s ease;
+            padding: 10px 15px; /* Adjusted padding */
+            border-radius: 50%; /* Rounded button */
+        }
+
+        .arrow-button:hover {
+            background-color: #0056b3;
+        }
+
+        .arrow-button.rotate {
+            transform: rotate(180deg);
+        }
+
+        .container {
+            /* background: rgb(255,246,230);
+            background: linear-gradient(0deg, rgba(255,246,230,1) 50%, rgba(255,221,214,1) 70%); */
+            border-radius: 20px;
+           padding: 10px;
+           background-image: url(https://cdn.pixabay.com/photo/2018/08/05/12/10/chocolate-vine-3585490_960_720.jpg);
+           background-size: cover;
+           background-repeat: no-repeat;
+}
+
+        /* Bus icons */
+        .bus-icon {
+            color: #1d1f20;
+            margin-right: 5px;
+            font-size: 20px;
+        }
+
+        .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: auto; /* Adjusted margin-left */
+    margin-right: auto; /* Adjusted margin-right */
+    width: 90%; /* Adjusted width */
+}
+
+.search-container button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #e7717d;
+    color: #fff;
+    margin-top: 10px;
+    display: block;
+    width: 100% ;
+    max-width: 160px;/* Adjusted width */
+   
+
+    
+}
+.search {
+    margin-top: 10px;
+    margin-left: auto; /* Aligns to the right */
+    margin-right: auto; /* Aligns to the left */
+    justify-content: center; /* Centers horizontally */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         /* Trending Offers Styles */
+    
+   
+    .cards-container {
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch; 
+    }
+    .custom-cards-container::-webkit-scrollbar { 
+    display: none;
+}
+
+    
+    .card {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 190px;
+    display: inline-block;
+    vertical-align: top;
+    width: 300px; /* Set a fixed width for the cards */
+    margin-right: 20px; /* Add some margin between cards */
+}
+
+    
+    .card-content {
+        display: flex;
+        align-items: center;
+    }
+    
+    .card img {
+        width: 200px;
+        height: 200px; 
+        margin-right: -10px;
+        margin-top: -18px;
+    }
+
+    .offer-details {
+        padding: 20px;
+    }
+    
+    .offer-details h3 {
+        margin-top: 0;
+    }
+    
+    .offer-details p {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+    
+    
+   
+
+    .offer-details .coupon-code {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        margin-top: 10px;
+        color: #007bff;
+    }
+
+    .offer-details .coupon-code span {
+        font-weight: bold;
+    }
+
+    button a {
+        text-decoration: none;
+    }
+
+    .trending-offers-container {
+       
+      
+        position: relative; /* Ensure relative positioning for absolute positioning of buttons */
+        background-color:aquamarine;
+        border-radius: 10px;
+        overflow: hidden;
+        /* background-color: #75ac97; */
+        height: auto;
+       
+        
+    }
+    
+    
+    .swiper-wrapper {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+    }
+
+    .trending-offers-container {
+        width: 1130px; /* Set the desired width */
+        text-align: center; /* Center the contents horizontally */
+    }
+
+    .cards-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    
+    h3 {
+        font-size: 18px;
+    } 
+    .swiper-wrapper1 {
+        display: flex;
+        justify-content: center;
+        
+    } 
+    
+    
+       /* why choose us*/
+    .box {
+    padding: 20px 20px;
+    width: 100%; /* Adjust width using percentages */
+    max-width: 1100px; /* Limit maximum width */
+    margin: 30px auto; /* Center align content */
+    box-shadow: 3px 3px 3px green;
+    background-color: lightgoldenrodyellow;
+    border-radius: 20px;
+}
+h4 {
+    font-family: 'poppins';
+    margin: 20px auto; /* Center align content */
+    width: 90%;
+    color: #b32f07;
+    border-radius: 10px;
+    text-align: center;
+}
+    h5{
+        font-family: 'poppins';
+       
+        color: darkred;
+        
+    }
+    p{
+        width: 100%;
+        opacity: 85%;
+        font-family:'poppins';   
+    }
+    .box:hover{
+        background-color: rgb(228, 224, 224);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+   
+
+       /* faq of teerdha */
+
+       .faq {
+    width: 100%;
+    max-width: 1000px; /* Adjust maximum width as needed */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#myaccordion {
+    max-width: 1000px; /* Adjust maximum width as needed */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.hidecontent {
+    display: none;
+}
+
+#myaccordion label {
+    box-shadow: 0 0 20px #d4d4d4;
+    display: block;
+    padding: 8px 22px;
+    margin: 20px 0px 1px 0px;
+    cursor: pointer;
+    background-color: rgb(244, 189, 167);
+    color: black;
+    transition: ease .5s;
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: 'poppins';
+    width: 100%; /* Adjust width to fill its container */
+}
+
+#myaccordion label:hover {
+    background-color: rgb(248, 221, 210);
+}
+
+.content {
+    box-shadow: 0 0 20px #d4d4d4;
+    background: #ffff;
+    padding: 10px 25px;
+    border: 1px solid #d4d4d4;
+    margin: -1 0 0 0;
+    border-radius: 10px;
+    width: 100%; /* Adjust width to fill its container */
+    font-family: 'poppins';
+    
+}
+
+#myaccordion input:checked+label+.content {
+    display: block;
+    -moz-animation: fadeIn 0.5s ease-out;
+    -o-animation: fadeIn 0.5s ease-out;
+    animation: fadeIn 0.5s ease-out;
+    font-family: 'poppins';
+}
+
+/* body {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-right: 5%;
+    padding-left: 5%;
+    background-color: #fff;
+} */
+
+h1 {
+    color: #b32f07;
+    text-align: center;
+    margin-bottom: -10px;
+    font-size: 24px;
+    
+   
+}
+
+#myaccordion label.active::before {
+    content: "\25BC";
+    color: maroon;
+    font-size: 15px;
+}
+
+#myaccordion label::before {
+    content: '\25B6';
+    font-size: 15px;
+    color: maroon;
+    float: right;
+    margin-left: 5px;
+    font-family: 'poppins';
+}
+
+  
+  
+p{
+    font-family: 'poppins';
+}
+.content-wrapper {
+    justify-content: center;
+    max-width: 1000px; /* Limit maximum width */
+    margin: 0 auto; /* Center align content */
+}
+.search-inputs {
+    display: flex;
+    align-items: center;
+}
+
+.arrow-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Media Query for Mobile */
+@media only screen and (max-width: 600px) {
+    .input-container {
+        text-align: center; /* Center align input containers */
+        margin-bottom: 10px; /* Add some bottom margin */
+    }
+    .input-container1 {
+        text-align: center; /* Center align input containers */
+        margin-bottom: 10px; /* Add some bottom margin */
+        margin-left: -50px;
+    }
+    .arrow-buttons {
+        text-align: center; /* Center align arrow buttons */
+        margin-top: -10px;
+        transform: rotate(90deg);
+    }
+    .search-inputs {
+        flex-direction: column; /* Stack input elements vertically */
+        align-items: center; /* Center align input elements */
+    }
+    .search-inputs label {
+        text-align: center; /* Center align labels */
+        margin-bottom: 5px; /* Add some bottom margin */
+    }
+    .search-inputs input[type="text"],
+    .search-inputs input[type="date"] {
+        margin: 10px 0; /* Adjust margin for input fields */
+    }
+    .search-inputs button {
+        margin-top: 10px; /* Add top margin to the button */
+    }
+}
+
+
+
+
+.input-container {
+    display: inline-block;
+    margin-right: 10px;
+    color: black;
+   
+}
+
+
+.input-container1 {
+    display: inline-block;
+    margin-right: 10px;
+    color: black;
+   
+}
+
+
+
+.search.buses {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+      @media (max-width: 768px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+   
+.card:hover {
+    transform: translateY(-5px);
+  }
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+  
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #333;
+}
+  
+.description {
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+   
+}
+  
+  
+a {
+    text-decoration: none; 
+}   
+  
+
+       
+
+.custom-card {
+    display: flex;
+    flex: 0 0 auto;
+    border:1px solid #ddd;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    overflow: hidden;
+    background-color: white;
+   text-align: left;
+    width: 360px;
+    height: 180px;
+}
+
+.custom-card img {
+  width: 130px;
+  height: 190px;
+  
+}
+
+.custom-card-content {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+   
+    width: 100%;
+    position: relative;
+}
+
+      
+.custom-cards-container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+           
+}
+        
+ 
+ .fixed-carousel-nav {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; 
+    top: 160%;
+    transform: translateY(-50%);
+   gap: 1100px;
+  
+   
+} 
+
+
+.carousel-nav {
+    position: absolute;
+    top: 80%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+  
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -85px;
+    cursor: pointer;
+    z-index: 1000;
+    margin-left: -25px;
+    margin-right: -25px;
+   
+}
+
+
+
+.prev {
+   left: 10px;
+}
+
+.next {
+    right: 10px;
+} 
+
+
+
+
+.title-card {
+    font-size: 14px;
+    color: rgb(74, 71, 71);
+    padding-left: 10px; 
+    margin-bottom: 3px;
+}
+
+.description-discount {
+    font-size: 14px;
+    color: rgb(74, 71, 71);
+    padding-left: 10px; 
+    margin-bottom: 3px;
+    
+}
+
+   
+
+
+.custom-card:last-child {
+    margin-right: 0;
+}
+
+.custom-card {
+    margin-right: 20px; 
+}
+
+
+
+        .custom-code {
+            font-size: 14px;
+            padding: 6px;
+            border-radius: 5px;
+          
+            color:rgb(120, 120, 215);
+            display: inline-block;
+            text-decoration: none;
+            background-color:rgb(237, 235, 235);
+          margin-left: 15px;
+            position: absolute;
+            bottom: 10px;
+        }
+
+.description-vaild{
+    font-size: 14px;
+    color: rgb(74, 71, 71);
+    padding-left: 10px;
+}
+
+
+.heading{
+   font-size: 18px;
+   padding-left: 10px;
+   color: #b32f07;
+}
+
+@media (max-width: 767px) {
+        /* CSS for screens smaller than 768px (e.g., mobile devices) */
+        .custom-card img {
+            width: 60px; /* Full width for each card on smaller screens */
+            height: 100px;
+           
+           
+        }
+    }
+    @media (max-width: 767px) {
+        /* CSS for screens smaller than 768px (e.g., mobile devices) */
+        .custom-card {
+           
+            height: 100px;
+            border-radius: 10px;
+        }
+        .title-card{
+            font-size: 7px;
+           
+            padding-left: 7px;
+        }
+        .heading{
+        margin-top: -7px;
+         font-size: 9px;
+         padding-left: 7px;
+         color: #b32f07;
+        }
+        .description-vaild{
+            font-size: 7px;
+            padding-left: 7px;
+        }
+        .description-discount{
+            font-size: 7px;
+            padding-left: 7px;
+        }
+        .custom-code {
+            font-size: 5px;
+            padding: 2px;
+            border-radius: 5px;
+            margin-left: 5px;
+          
+         
+        }
+        .custom-cards-container{
+            margin-top: -30px;
+        }
+    }
+
+
+</style>
+<style>
+    
+/* Media Query for Mobile */
+@media only screen and (max-width: 600px) {
+    .input-container {
+        text-align: center; /* Center align input containers */
+        margin-bottom: 10px; /* Add some bottom margin */
+        margin-top: -30px;
+    }
+    .input-container1 {
+        text-align: center; /* Center align input containers */
+        margin-bottom: 10px; /* Add some bottom margin */
+        margin-top: -5px;
+        margin-left: -40px;
+    }
+    .arrow-buttons {
+        text-align: center; /* Center align arrow buttons */
+        margin-top: -30px;
+        transform: rotate(90deg);
+    }
+    .search-inputs {
+        flex-direction: column; /* Stack input elements vertically */
+        align-items: center; /* Center align input elements */
+       
+     
+    }
+    .search-inputs label {
+        text-align: center; /* Center align labels */
+        margin-bottom: 5px; /* Add some bottom margin */
+        
+        
+    }
+    .search-inputs input[type="text"],
+    .search-inputs input[type="date"] {
+        margin: 5px 0; /* Adjust margin for input fields */
+    }
+    .search-inputs button {
+        margin-top: 10px; /* Add top margin to the button */
+    }
+}
+
+
+</style>
+</head>
+<body><br><br>
+            
+
+<div class="content-wrapper">
+    <!-- Bus Search Form -->
+    <div class="container">
+        <div class="bus-search-form"><br>
+            <center>
+                <h1><b>Teerdha Online Bus Ticket Booking Site</b></h1>
+            </center><br>
+            <div class="search-inputs">
+                <div class="input-container">
+                    <i class="bus-icon from fas fa-bus"></i>
+                    <input id="fromInput" type="text" placeholder="From">
+                </div>
+                <div class="arrow-buttons">
+                    <button id="arrowButton" class="arrow-button" onclick="swapDetails()">&larr;</button>
+                </div>
+                <div class="input-container">
+                    <i class="bus-icon to fas fa-bus"></i>
+                    <input id="toInput" type="text" placeholder="To">
+                </div>
+                <div class="input-container1">
+                    <i class="bus-icon from fas fa-bus"></i>
+                    <input type="date">
+                </div>
+                <div class="search buses text-center mb-2 mt-4 "  >
+                    <button onclick="searchBuses()" style="width: 110px; font-size: 20px;color: black;" >Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br><br><br>
+
+
+<h4><b>Trending Offers</b></h4><br><br>
+<center>
+<div class="container-card" style="max-width:1160px;margin: auto;justify-items: left;padding: 20px;">
+        <div class="custom-cards-container">
+            {% for i in res %}
+            <div class="custom-card card-{{ forloop.counter }}">
+                {% if i.image %}
+                <img src="{{ i.image }}" class="card-img" height="190px" width="150px" id="img">
+                {% endif %}
+                <div class="custom-card-content">
+                    <a href="{{ i.Link }}" class="card-link"> 
+                        <div class="heading" id="heading">{{ i.heading }}</div>
+                        <div class="title-card" id="title">{{ i.title }}</div> 
+                        <div class="description-discount" id="discount">{{ i.discount }}</div>
+                        <div class="description-vaild" id="vaild">{{ i.valid }}</div>
+                         <p><span class="custom-code">{{ i.code }}</span></p> 
+                    </a>
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
+      
+        <div class="fixed-carousel-nav">
+            
+            <div class="carousel-nav prev" href="#cardcarousel" role="button" data-slide="prev">
+                <span class="bi bi-arrow-left-circle-fill h3" style="color: rgb(164, 82, 82);" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </div>
+            <div class="carousel-nav next" href="#cardcarousel" role="button" data-slide="next">
+                <span class="bi bi-arrow-right-circle-fill h3" style="color: rgb(164, 82, 82);" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </div>
+</div>
+
+
+
+
+ 
+
+
+
+
+
+<!-- Why Choose Us -->
+<h4 style="font-size: 25px; font-weight: bold; font-family: 'poppins';"><b>Why Choose us ?</b></h4>
+    {% for i in k2 %}   
+        <div class="box">
+            <h5 style="font-size: 21px;">{{i.title}}</h5>
+            <p style="font-size: 18px;">{{i.content}}</p>
+        </div> 
+    {% endfor %}<br><br>
+
+<!-- FAQs -->
+<div class="faq">
+<h1 style="font-family: 'poppins';"><center><b>Online Bus Booking FAQ’s</b></center></h1>
+    <div id="myaccordion">
+        {% for i in k1 %}
+        <input type="checkbox" id="accordion1" class="hidecontent"/>
+        <label class="accordion1">{{ i.description1 }}</label>
+                       
+        
+    
+        <div class="content hidecontent">
+            <p class="card-text">{{ i.description2 }}</p>
+        </div>
+        {% endfor %}
+       
+    </div>
+</div>
+<!-- JavaScript -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    // Bus Search Form Script
+    function swapDetails() {
+        var fromValue = document.getElementById("fromInput").value;
+        var toValue = document.getElementById("toInput").value;
+        document.getElementById("fromInput").value = toValue;
+        document.getElementById("toInput").value = fromValue;
+        document.getElementById("arrowButton").classList.toggle("rotate");
+    }
+
+    function searchBuses() {
+        // Your bus search functionality here
+        // window.location.href = window.location.href;
+    }
+
+   
+</script>
+
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var cardContainer = $(".custom-cards-container");
+        var cardWidth = cardContainer.find(".custom-card").outerWidth(true);
+        var totalWidth = cardWidth * $(".custom-card").length;
+        var animationDuration = 0; 
+        var intervalDelay = 3000; 
+        var autoScrollInterval; 
+
+        function startAutoScroll() {
+            autoScrollInterval = setInterval(function() {
+                $(".next").click();
+            }, intervalDelay);
+        }
+
+        
+
+        function stopAutoScroll() {
+            clearInterval(autoScrollInterval);
+        }
+
+        $(".next").click(function() {
+            cardContainer.stop().animate({
+                scrollLeft: '+=' + cardWidth
+            }, animationDuration, function() {
+                if (cardContainer.scrollLeft() + cardContainer.width() >=13) {
+                    cardContainer.append($(".custom-card").first());
+                    cardContainer.scrollLeft(cardContainer.scrollLeft() - cardWidth);
+                }
+            });
+        });
+
+        
+
+        $(".prev").click(function() {
+            cardContainer.stop().animate({
+                scrollLeft: '-=' + cardWidth
+            }, animationDuration, function() {
+                if (cardContainer.scrollLeft() <= 0) {
+                    cardContainer.prepend($(".custom-card").last());
+                    cardContainer.scrollLeft(cardContainer.scrollLeft() + cardWidth);
+                }
+            });
+        });
+
+        $(".carousel-nav").hover(
+            function() {
+                stopAutoScroll();
+            },
+            function() {
+                startAutoScroll();
+            }
+        );
+
+        startAutoScroll();
+  
+    });
+   
+</script>
+
+<script>
+$(document).ready(function() {
+var autoScrollInterval;
+
+function startAutoScroll() {
+autoScrollInterval = setInterval(function() {
+    moveNext();
+}, intervalDelay);
+}
+
+function stopAutoScroll() {
+clearInterval(autoScrollInterval);
+}
+
+function moveNext() {
+cardContainer.stop().animate({
+    scrollLeft: '+=' + cardWidth
+}, animationDuration, function() {
+    if (cardContainer.scrollLeft() + cardContainer.width() >= 13) {
+        cardContainer.append($(".custom-card").first());
+        cardContainer.scrollLeft(cardContainer.scrollLeft() - cardWidth);
+    }
+});
+}
+
+function movePrev() {
+cardContainer.stop().animate({
+    scrollLeft: '-=' + cardWidth
+}, animationDuration, function() {
+    if (cardContainer.scrollLeft() <= 0) {
+        cardContainer.prepend($(".custom-card").last());
+        cardContainer.scrollLeft(cardContainer.scrollLeft() + cardWidth);
+    }
+});
+}
+
+function setupCarousel() {
+if ($(window).width() < 768) { // Adjust this breakpoint as needed
+    // Disable carousel behavior for small screens
+    $(".custom-card").css("flex", "0 0 auto");
+    $(".custom-cards-container").css("overflow-x", "auto");
+    $(".carousel-nav").hide(); // Hide navigation buttons
+    stopAutoScroll(); // Stop auto-scrolling
+} else {
+    // Enable carousel behavior for larger screens
+    $(".custom-card").css("flex", "0 0 " + cardWidth + "px");
+    $(".custom-cards-container").css("overflow-x", "hidden");
+    $(".carousel-nav").show(); // Show navigation buttons
+    startAutoScroll(); // Start auto-scrolling
+}
+}
+
+// Handle window resize to adjust carousel behavior
+$(window).on("resize", function() {
+setupCarousel();
+});
+
+// Handle next button click
+$(".next").click(function() {
+moveNext();
+});
+
+// Handle previous button click
+$(".prev").click(function() {
+movePrev();
+});
+
+// Handle swipe gestures using touch events
+var touchStartX = 0;
+var touchEndX = 0;
+$(".custom-cards-container").on("touchstart", function(event) {
+touchStartX = event.originalEvent.touches[0].pageX;
+});
+
+$(".custom-cards-container").on("touchend", function(event) {
+touchEndX = event.originalEvent.changedTouches[0].pageX;
+var touchDiff = touchStartX - touchEndX;
+
+if (touchDiff > 50) {
+    // Swiped left
+    moveNext();
+} else if (touchDiff < -50) {
+    // Swiped right
+    movePrev();
+}
+});
+
+// Start initial setup
+setupCarousel();
+});
+
+</script>
+
+
+
+<script>
+    $(document).ready(function() {
+     
+  
+      function setupCarousel() {
+          cardWidth = $(".custom-card").outerWidth(true); // Update card width
+         
+  
+          if ($(window).width() < 768) {
+              // Adjust for small screens (e.g., mobile devices)
+              $(".custom-card").css({
+                  "flex": "0 0 auto",
+                  "width": "160px"
+              });
+              cardContainer.css();
+              $(".carousel-nav").hide(); // Hide navigation buttons
+              stopAutoScroll(); // Stop auto-scrolling
+          } else {
+              // Adjust for larger screens
+             
+              $(".carousel-nav").show(); // Show navigation buttons
+              startAutoScroll(); // Start auto-scrolling
+          }
+      }
+  
+      // Handle window resize to adjust carousel behavior
+      $(window).on("resize", function() {
+          setupCarousel();
+      });
+  
+     
+  });
+  
+  </script>
+  
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<!-- Your custom JavaScript here -->
+<script>
+        var faq = document.getElementsByTagName("label");
+        var i;
+        for (i = 0; i < faq.length; i++) {
+            faq[i].addEventListener("click", function () {
+                var body = this.nextElementSibling;
+                var isActive = this.classList.contains("active");
+                
+                // Close all other open contents
+                var allContents = document.querySelectorAll('.content');
+                for (var j = 0; j < allContents.length; j++) {
+                    allContents[j].style.display = 'none';
+                }
+                // Remove 'active' class from all labels
+                var allLabels = document.querySelectorAll('label');
+                for (var k = 0; k < allLabels.length; k++) {
+                    allLabels[k].classList.remove('active');
+                }
+    
+                // Toggle active class and display content
+                if (!isActive) {
+                    this.classList.add("active");
+                    body.style.display = "block";
+                } else {
+                    this.classList.remove("active");
+                    body.style.display = "none";
+                }
+            });
+        }
+    </script>
+</script>
+
+
+
+</body>
+</html>
+
+{% endblock %}

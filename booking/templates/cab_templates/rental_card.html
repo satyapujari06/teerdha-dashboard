@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>rental card</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
+    <style>
+       .container {
+  max-width: 1000px;
+  margin: auto;
+  background: #f9f9f9;
+  padding: 10px;
+}
+
+    body {
+  font-family: Arial, sans-serif;
+  margin-top: 10px;
+  background-color: #f9f9f9;
+}
+        .cab-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .cab-card-title {
+            color:maroon;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            margin-left: -15px;
+        }
+        .cab-card ul {
+            list-style-type: disc;
+            padding: 0;
+        }
+        .cab-card ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: black;
+        }
+        .custom-card {
+            margin-left: 15px;
+            margin-bottom: 15px;
+            background-color:white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            height: 100%; 
+        }
+
+        .btn-on-image {
+            padding: 10px 20px;
+            background-color: #32437E;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        .btn-on-image:hover {
+            background-color: #0056b3;
+            color: white;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .container1{
+            position: relative;
+        }
+    .card-image img {
+    max-width: 100%;
+    height: 450px;
+    width: 1600px;
+}
+@media (max-width: 768px) {
+            #img {
+                height: auto;
+                max-height: 230px;
+            }
+            .btn-on-image {
+                font-size: 10px; 
+                padding: 4px 8px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <div>
+        {% for i in res %}
+            <div class="card-image" style="margin-bottom: 20px; text-align: center;margin-top: -5px">
+                {% if i.photo %}
+                <div class="container1">
+                    <img src="{{ i.photo}}" id="img">
+                    <a href="/cab_main/" class="btn btn-on-image">Book Now</a></div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <br>
+
+        <div>
+            {% for i in res %}
+                {% if i.title %}
+                    <div class="cab-card"> 
+                        <div class="card-body">
+                            <h4 class="cab-card-title">{{ i.title }}</h4>
+                            <ul>
+                                {% if i.point1 %}
+                                    <li>{{ i.point1 }}</li>
+                                {% endif %}
+                                {% if i.point2 %}
+                                    <li>{{ i.point2 }}</li>
+                                {% endif %}
+                                {% if i.point3 %}
+                                    <li>{{ i.point3 }}</li>
+                                {% endif %}
+                                {% if i.point4 %}
+                                    <li>{{ i.point4 }}</li>
+                                {% endif %}
+                                {% if i.point5 %}
+                                    <li>{{ i.point5 }}</li>
+                                {% endif %}
+                                {% if i.point6 %}
+                                    <li>{{ i.point6 }}</li>
+                                {% endif %}
+                                {% if i.point7 %}
+                                    <li>{{ i.point7 }}</li>
+                                {% endif %}
+                                {% if i.point8 %}
+                                    <li>{{ i.point8 }}</li>
+                                {% endif %}
+                                {% if i.point9 %}
+                                    <li>{{ i.point9 }}</li>
+                                {% endif %}
+                                {% if i.point10 %}
+                                    <li>{{ i.point10 }}</li>
+                                {% endif %}
+                                {% if i.point11 %}
+                                    <li>{{ i.point11 }}</li>
+                                {% endif %}
+                                {% if i.point12 %}
+                                    <li>{{ i.point12 }}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    <br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

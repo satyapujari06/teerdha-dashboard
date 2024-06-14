@@ -1,0 +1,166 @@
+<html>
+    <head>
+        <title>data displaying</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+
+<style>
+
+#sj{
+    justify-content: center;
+   
+}
+h2{
+    color: brown;
+    text-align: center;
+
+}
+h5{
+    color: green;
+}
+.coupon code{
+    font-weight: bold;
+}
+.custom-container{
+    position: relative;
+}
+
+@media (max-width: 768px) {
+.container {
+        max-width: 90%; 
+ }
+}
+#img{
+max-height: auto;
+max-width: 1600px;
+}
+
+.btn-on-image {
+            background-color: #0d1a5f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            top: 75%;
+            left: 20%;
+            transform: translate(-50%,-50%);
+        }
+
+        .btn-on-image:hover {
+            background-color: #2E718B;
+            color: white;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .content{
+          position: relative;
+        }
+</style>
+
+
+    </head> 
+<body><br>
+  
+  {% for j in rdx %}
+
+  <center>
+    <div class="content">
+    <img class="w-100" src="{{ j.image }}"  style="height: 400px;" id="img">
+    <a href="/" class="btn btn-on-image">Book Now</a></div> 
+   
+    </center>
+</div>
+
+  <div class="container mt-5" style="width: 800px;background-color: rgb(230, 196, 155);border-radius: 10px;">
+    <div class="row pt-3 pl-3">
+    
+        <p><b>{{j.text}}</b></p>
+    </div>
+        <div class="row">
+            <div class="col">
+                <p>{{j.text1}}</p>
+            </div>
+           
+        </div>
+        
+   
+  </div><br><br>
+
+  {% endfor %}
+
+  
+ <h2>Offer Details</h2>
+<center>
+    <div class="custom-container" style="width: 1050px;">
+        
+        <div class="row" id="sj" style="height: 300px;">
+            {% for i in rx %}
+                <div class="col-3 m-5 card" style="width: 300px;border-radius: 30px;position:relative;">
+                    <img src="{{ i.image1 }}" alt="image1" style="border-radius: 30px;margin-top: 10px;"><br>
+                    <div class="h5">
+                        {{i.category}}
+                    </div>
+                    <div style="background-color: rgb(209, 217, 222);color: red;">
+                    <center>{{i.couponcode}}</center>
+                    </div><br>
+                    <p>{{ i.offer }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</center>
+<br><br><br><br><br><br><br><br><br>
+
+
+
+<div class="container" style="background-color: rgb(232, 237, 237);border-radius: 10px;padding: 10px;">   
+
+ <h5>What do you get?</h5>  
+ <ul>
+    {% for p in rd %}
+    <li>{{ p.content }}</li>
+    {% endfor %}
+ </ul> 
+ </div><br>
+
+ <div class="container" style="background-color: rgb(232, 237, 237);border-radius: 10px;padding: 10px;">   
+
+ <h5>How do you get it?</h5>  
+ <ul>
+    {% for q in rp %}
+    <li>{{ q.content1 }}</li>
+    {% endfor %}
+ </ul> 
+ </div><br>
+
+ <div class="container" style="background-color: rgb(232, 237, 237);border-radius: 10px;padding: 10px;">   
+ <h5>Conditions in case of cancellation:</h5> 
+ <ul>
+    {% for k in rs %}
+    {% if k.condition %}
+    <li>{{ k.condition }}</li>
+    {% endif %}
+    {% endfor %}
+ </ul>  
+ </div><br>
+
+    
+<div class="container" style="background-color: rgb(232, 237, 237);border-radius: 10px;padding: 10px;">
+    <h5>Terms & Conditions:</h5>
+    <ul>
+        {% for k in rs %}
+        <li>{{ k.terms }}</li>
+        {% endfor %}
+    </ul>
+</div>
+  
+</body>
+</html> 
+<br><br><br><br>  
+

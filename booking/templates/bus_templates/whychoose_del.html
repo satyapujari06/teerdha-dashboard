@@ -1,0 +1,115 @@
+{% extends 'admin.html' %}
+{% block main_content %}
+
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+               
+        
+                table {
+                    width: 950px;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                    background-color: white;
+                    border: 1px solid #ddd;
+                    margin-left: 300px;
+                }
+        
+                th, td {
+                    padding: 15px;
+                    text-align: center;
+                }
+        
+                th {
+                    background-color: cornflowerblue;
+                    color: white;
+                }
+        
+                td a {
+                    text-decoration: none;
+                    display: inline-block;
+                    padding: 8px 15px;
+                    border-radius: 5px;
+                    margin-right: 5px;
+                    color: #333;
+                    font-weight: bold;
+                }
+                td a.delete {
+                  font-weight: bold;
+                  color: red;
+                }
+                td a.edit {
+                   font-weight: bold;
+                   color: green;
+                }
+              
+                .sk{
+                    padding-left: 300px;
+                }
+                   /* button css    */
+
+
+.styled-button {
+    width: 300px;
+    margin-left: 630px;
+    padding: 5px;
+    border:2px solid black; 
+    background-color:rgb(62, 113, 221);
+    border-radius: 5px; 
+    cursor: pointer;
+    display: inline-block; 
+    text-align: center; 
+    transition: background-color 0.3s;
+}
+
+
+.styled-button a {
+    text-decoration: none;
+    color: white;
+    display: block; 
+    width: 100%; 
+    height: 100%;
+    line-height: 1.5;
+    font-family: Arial, sans-serif; 
+    font-size: 13px;
+}
+
+               
+        </style>
+    </head>
+    <body><br>
+       
+       <h2 class="sk">Buses whychoose crud operations:</h2><br>
+       
+
+       <button class="styled-button" style="width: 200px;margin-left: 1050px;">
+        <a href="/bus_whychoose_form/">WHYCHOOSE-INSERT-FORM</a></button>
+
+        <br>
+    
+        <table border="1px">
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+            {% for i in k2 %}
+            <tr>
+                <td>{{i.title}}</td>
+                <td>{{i.content}}</td>
+                
+                
+                <center><td><a href="/bus_whychoose_delete/{{i.id}}" class="delete"><i class="fas fa-trash-alt"></i> Delete</a></td></center>
+                <td><a href="/bus_whychoose_edit/{{i.id}}" class="edit"><i class="fas fa-edit"></i> Edit</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    
+    
+    </body>
+    </html>
+
+{% endblock main_content %}    

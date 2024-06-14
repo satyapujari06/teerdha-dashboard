@@ -1,0 +1,130 @@
+{% extends 'admin.html' %}
+{% block main_content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+     
+
+table {
+            width: 950px;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            border-radius: 10px;
+            margin: 0;
+            height: 300px;
+            margin-left: 300px;
+
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        td {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        tr:last-child td {
+            border-bottom: none;;
+        }
+        .action-links a {
+            padding: 10px 12px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-right: 5px;
+        }
+        .action-links .delete {
+            background-color: #e74c3c;
+        }
+        .action-links .edit {
+            background-color: #3498db;
+        }
+        .op{
+            padding-left: 300px;
+        }
+           /* button css    */
+
+
+.styled-button {
+    width: 300px;
+    margin-left: 630px;
+    padding: 5px;
+    border:2px solid black; 
+    background-color:rgb(62, 113, 221);
+    border-radius: 5px; 
+    cursor: pointer;
+    display: inline-block; 
+    text-align: center; 
+    transition: background-color 0.3s;
+}
+
+
+.styled-button a {
+    text-decoration: none;
+    color: white;
+    display: block; 
+    width: 100%; 
+    height: 100%;
+    line-height: 1.5;
+    font-family: Arial, sans-serif; 
+    font-size: 14px;
+}
+
+    </style>
+    
+</head>
+<body>
+<br>
+    <h2 class="op">Cab faq crud operaations:</h2><br>
+
+
+    <button class="styled-button" style="width: 200px;margin-left: 1050px;">
+        <a href="/cabfaq_upd/">FAQS-INSERT-FORM</a></button>
+
+        <br><br>
+
+
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Title</th>
+                    <th>description</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in b %}
+                <tr>
+                    
+                    <td>{{ i.Title }}</td>
+                    <td>{{ i.description }}</td>
+                    <td class="action-links">
+                        <a href="/cabfaq_crud_del/{{ i.id }}" class="delete"><i class="fas fa-trash-alt"></i> </a>
+                    </td>
+
+                    <td class="action-links">
+                        <a href="/cabfaq_crud_edit/{{ i.id }}" class="edit"><i class="fas fa-edit"></i></a>
+                    </td>
+
+            </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% endblock main_content %}

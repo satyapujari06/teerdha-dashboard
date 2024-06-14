@@ -1,0 +1,1101 @@
+
+
+{% extends 'base.html' %}
+{% block flight %}
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flights</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" integrity="sha512-xgIrH5DRuEOcZK5cPtVXx/WSp5DTir2JNcKE5ahV2u51NCTD9UDxbQgZHYHVBlPc4H8tug6BZTYIl2RdA/X0Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Choices.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- Choices.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<style>
+   
+  
+    /* For mobile devices */
+    @media (max-width: 767.98px) {
+    #select-a-fare-type .form-check {
+        display: block;
+        margin-bottom: 5px; 
+        /* Adjust as needed */
+    }
+    #fare-type-a{
+        color: whitesmoke;
+    }
+   
+    
+}
+
+
+/* For larger devices like tablets and desktops */
+@media (min-width: 577px) {
+    .form-check {
+        display: inline-block;
+        margin-right: 10px; /* Adjust as needed */
+    }
+}
+#fare-type-a{
+    color: red;
+}
+   
+.car:hover{
+    transform: scale(1.2);
+    transition: transform 0.5s ease;
+    border-radius: 18px;
+}
+.adjust{
+    margin-top: 28%;
+    color:ghostwhite;
+    margin-right: 20%;
+}
+h4{
+    color:coral;
+    text-shadow: 1px 1px black;
+    text-align: center;
+    font-size: 30px;
+}
+
+ .navsearch{
+    border:2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-image: url(https://cdn.pixabay.com/photo/2016/11/23/13/48/beach-1852945_1280.jpg);
+    font-weight: bold;
+    
+} 
+ .features{
+    border: 5px solid #ddd;
+    border-radius: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 50px solid #ddd;
+} 
+
+ label{
+    text-align: center;
+}
+
+/*............            set a fare  hover over effect        ............  */
+.armed-fare{
+    position:relative;
+}
+.armed-fare::after{
+    content: "Mandatory for all travellers to carry a valid ARMED FORCES ID or dependent card at the time of boarding.";
+    position:absolute;
+    top:150%;
+    left:-100px;
+    visibility:hidden;
+    opacity:0;
+    transition: opacity 0.3 ease;
+}
+.armed-fare:hover::after{
+    visibility: visible;
+    opacity:1;
+    width:260px;
+    font-size: 13px;
+    background-color: #ddd;
+    border:2px solid #ddd;
+    border-radius: 10px;
+    color:rgb(168, 106, 24);
+    padding: 5px 10px;
+}
+
+.student-fares{
+    position:relative;
+}
+.student-fares::after{
+    content: "Mandatory for all students to carry a valid STUDENT ID card at the time of boarding.";
+    position:absolute;
+    top:150%;
+    left:-100px;
+    visibility:hidden;
+    opacity:0;
+    transition: opacity 0.3 ease;
+}
+.student-fares:hover::after{
+    visibility:visible;
+    opacity:1;
+    width:260px;
+    font-size: 14px;
+    background-color: #ddd;
+    border:2px solid #ddd;
+    border-radius: 10px;
+    color:rgb(168, 106, 24);
+    padding: 5px 10px;
+}
+
+.senior-citizen{
+    position:relative;
+}
+.senior-citizen::after{
+    content:"Applicable for citizens above 60 years of age. Please provide valid proof of age at the airport.";
+    position:absolute;
+    top:150%;
+    left:-100px;
+    visibility: hidden;
+    opacity:0;
+    transition: opacity 0.3 ease;
+}
+.senior-citizen:hover::after{
+    visibility: visible;
+    opacity:1;
+    width:260px;
+    font-size:14px;
+    background-color: #ddd;
+    border:2px solid #ddd;
+    border-radius: 10px;
+    color:rgb(168, 106, 24);
+    padding: 5px 10px;
+}
+.doctors-fare{
+    position:relative;
+}
+.doctors-fare::after{
+    content:"Applicable only for medical personal. It is mandatory to show a valid ID at the airport, without which boarding may be denied.";
+    position:absolute;
+    top:150%;
+    left:-100px;
+    visibility:hidden;
+    opacity:0;
+    transition: opacity 0.3 ease;
+}
+.doctors-fare:hover::after{
+    visibility: visible;
+    opacity:1;
+    width:260px;
+    font-size:14px;
+    background-color: #ddd;
+    border:2px solid #ddd;
+    border-radius: 10px;
+    color:rgb(168, 106, 24);
+    padding: 5px 10px;
+}
+   
+.car:hover{
+    transform: scale(1.2);
+    transition: transform 0.5s ease;
+    border-radius: 18px;
+}
+.adjust{
+    margin-top: 28%;
+    color:ghostwhite;
+    margin-right: 20%;
+}
+h4{
+    color:coral;
+    text-shadow: 1px 1px black;
+    text-align: center;
+    font-size: 30px;
+}
+
+ .features{
+    border: 5px solid #ddd;
+    border-radius: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 50px solid #ddd;
+} 
+
+ label{
+    text-align: center;
+}
+
+
+
+</style>
+
+<style>
+       
+    .faq-section{
+        
+        margin: 20px auto;
+
+    }
+    .question{
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+        padding:8px;
+        border:1px solid;
+        margin:5px;
+        font-style:italic;
+        border-radius:15px;
+       
+    }
+    .answer{
+        display: none;
+        padding-left: 20px;
+        font-style:italic;
+        font-size:15px;
+    
+    }
+    .question i{
+        float:right;
+    }
+    
+    .container{
+        margin:0 auto;
+        padding:35px;        
+        
+    }
+   
+    .question:hover{
+        background-color: rgb(215, 250, 187);
+    }
+</style>
+
+<style>
+   
+    
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    
+    .flip-card-front {
+      background-color: #bbb;
+      border-radius: 20px;
+      color: black;
+    }
+    
+    .flip-card-back {
+      font-style: italic;
+      border-radius: 20px;
+      color: black;
+      text-shadow: wheat;
+      transform: rotateY(180deg);
+    } */
+
+    #op{
+        color: rgb(109, 54, 54);
+        font-size: 20px;
+    }
+    .form-check-label-one{
+        
+        padding-right: 30px;
+       justify-content: space-evenly;
+    }
+    
+
+ .container p {
+    margin: 0; 
+    padding: 10px;
+    white-space: pre-wrap;
+}
+
+
+    </style>
+
+<style>
+      @media (max-width: 768px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+   
+.card:hover {
+    transform: translateY(-5px);
+  }
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+  
+.title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #333;
+}
+  
+.description {
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+   
+}
+  
+  
+a {
+    text-decoration: none; 
+}   
+  
+
+.custom-card {
+    display: flex;
+    flex: 0 0 auto;
+    border:1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    overflow: hidden;
+    background-color: white;
+    justify-content: center;
+    width: 360px;
+    height: 200px;
+}
+
+.custom-card img {
+  width: 140px;
+  height: 200px;
+  border-top-right-radius: 40%;
+  border-bottom-right-radius: 10%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.custom-card-content {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+}
+
+      
+.custom-cards-container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+           
+}
+        
+ 
+ .fixed-carousel-nav {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px; 
+    top: 160%;
+    transform: translateY(-50%);
+   gap: 1100px;
+  
+   
+} 
+
+
+.carousel-nav {
+    position: absolute;
+    top: 80%;
+    transform: translateY(-50%);
+    color: #fff;
+    border-radius: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -90px;
+    cursor: pointer;
+    z-index: 1000;
+    margin-left: -30px;
+    margin-right: -30px;
+   
+}
+
+
+
+.prev {
+   left: 10px;
+}
+
+.next {
+    right: 10px;
+} 
+
+
+
+
+.title-card {
+    font-size: 18px;
+  
+    margin-bottom: 10px;
+    color:chocolate;
+}
+
+.description-card {
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 20px;
+   
+}
+
+.card-1 { background-color: rgb(207, 207, 252); } 
+.card-2 { background-color: rgb(252, 214, 220); } 
+.card-3 { background-color: rgb(202, 253, 189); } 
+.card-4 { background-color: rgb(228, 224, 224); } 
+.card-5 { background-color: rgb(219, 201, 188); } 
+.card-6 { background-color: rgb(227, 186, 223); } 
+.card-7 { background-color: rgb(234, 223, 206); } 
+.card-8 { background-color: rgb(201, 213, 153); } 
+        
+
+h4 {
+  color:coral;
+  font-size:25px;
+  font-weight: bold;
+  margin-top: 10px; 
+  margin-bottom: 10px;
+}
+.custom-card:last-child {
+    margin-right: 0;
+}
+
+.custom-card {
+    margin-right: 20px; 
+    width: calc(33.33% - 20px); 
+   
+} 
+/* .custom-card {
+    width: calc(33.33% - 20px); 
+    float: left;
+    margin: 10px;
+    box-sizing: border-box;
+    gap: 50px;
+} */
+
+.custom-cards-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+</style>
+<style>
+    @media only screen and (max-width: 767px) {
+        .text-right {
+            text-align: right !important;
+        }
+
+        .text-right .fa-angle-down {
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: rotate(360deg);
+        }
+    }
+
+</style>
+<style>
+    .search-button-container {
+        position: relative;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .search-button {
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #007bff; 
+        color: #fff; 
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+       
+        transition: background-color 0.3s ease;
+    }
+    .search-button:hover {
+        background-color: #0056b3; 
+    }
+</style>
+
+<style>
+
+
+   
+ 
+@media only screen and (min-width: 1220px) {
+  
+    .custom-card {
+        width: 360px; 
+       
+    }
+    .container-card {
+        width: 1220px; 
+        padding: 0;
+    }
+    
+}
+
+
+
+
+@media (max-width: 767px) {
+       
+        .custom-card img {
+            width: 60px; 
+            height: 100px;
+            border-top-right-radius: 40%;
+           border-bottom-right-radius: 10%;
+           border-top-left-radius: 10px;
+           border-bottom-left-radius: 10px;
+           
+        }
+    }
+    @media (max-width: 767px) {
+       
+        .custom-card {
+            height: 100px;
+            border-radius: 10px;
+           
+           
+        }
+        .title-card{
+            font-size: 10px;
+        }
+        .description-card{
+            font-size: 8px;
+            margin-top: -10px;
+           
+        }
+        .btn-primary{
+            width: 50px;
+            font-size: 7px;
+           
+        }
+        .custom-cards-container{
+            margin-top: -30px;
+         
+        }
+       
+    }
+
+    @media (max-width: 767.98px) {
+        .d-flex.justify-content-center-a {
+            justify-content: center; /* Center align horizontally */
+            align-items: right; /* Center align vertically */
+           margin-left: 160px;
+           margin: -20px auto;
+           transform: rotate(90deg);
+        }
+    }
+
+/* @media (max-width: 768px) {
+    .custom-card {
+        width: calc(50% - 20px); 
+    }
+}
+
+@media (max-width: 480px) {
+    .custom-card {
+        width: calc(100% - 20px); 
+    }
+} */
+
+/* faqs css */
+
+@media (max-width: 768px) {
+    .answer {
+      padding-bottom: 18px; 
+     
+    }
+   
+   
+}   
+
+</style>
+
+
+</head>
+<body >
+    
+    <form method="post" class="mt-3">{% csrf_token %}  
+
+        <div class="pt-3 pb-4">
+           <div class="container navsearch p-4">
+               <form>
+                   <div class="mb-3">
+                       <!-- Radio buttons for selecting one-way or round trip -->
+                       <input type="radio" value="one way" id="one_way" name="way" onclick="toggleReturnDate()" checked>
+                       <label class="form-check-label-one" for="one_way">One Way</label>
+           
+                       <input type="radio" value="two way" id="two_way" name="way" onclick="toggleReturnDate()">
+                       <label class="form-check-label-one" for="two_way">Round Trip</label>
+                   </div>
+       
+                   <!-- Flight search inputs -->
+                   <div class="flight-search-container row">
+                       <!-- Input fields for From, To, Departure, Return, Cabin Class -->
+                       <div class="col-md-2">
+                           <label class="form-label" for="fromid">From:</label>
+                           <input type="text" class="form-control" id="fromid" name="fromid">
+       
+                       </div>
+                       <div class="d-flex justify-content-center-a" style="height: fit-content; margin-top: 8px; width: max-content;">
+                           <button class="btn ml-2 mt-4 bg-white text-primary" style="border: 1.5px solid #ddd;" type="button" onclick="swapLocations()"><i class="bi bi-arrow-left-right"></i></button>
+       
+                       </div>
+                       <div class="col-md-2">
+                           <label class="form-label" for="toid">To:</label>
+                           <input type="text" class="form-control" id="toid" name="toid">
+       
+                       </div>
+                       <div class="col-md-2">
+                           <label class="form-label" for="dpdate">Departure:</label>
+                           <input type="date" class="form-control" id="dpdate" name="dpdate">
+       
+                       </div>
+                       <div class="col-md-2">
+                           <label class="form-label" for="rtdate">Return:</label>
+                           <input type="date" class="form-control" id="rtdate" name="rtdate" disabled>
+       
+                       </div>
+                       <div class="col-md-2">
+                           <label class="form-label" for="cbclass">Cabin Class:</label>
+                           <select name="cbclass" id="cbclass" class="form-control">
+                               <option value="Select">Select</option>
+                               <option value="ECONOMY">ECONOMY</option>
+                               <option value="PREMIUM_ECONOMY">PREMIUM_ECONOMY</option>
+                               <option value="BUSINESS">BUSINESS</option>
+                               <option value="FIRST">FIRST</option>
+                           </select>
+                       </div>
+                       
+                   </div>
+       
+        <center>     <div class="pt-4">
+                       <!-- Radio buttons for selecting fare type -->
+                       <label id="fare-type-a" for="select-a-fare-type" class="text d-block">Select a Fare Type:</label>
+                   
+                       <div id="select-a-fare-type">
+                           <div class="form-check">
+                               <input type="radio" id="regular-fare" name="fare-type" value="regular-fare" class="form-check-input">
+                               <label class="form-check-label" for="regular-fare">Regular Fares</label>
+                           </div>
+                   
+                           <div class="form-check">
+                               <input type="radio" id="armed-fares" name="fare-type" value="armed-fares" class="form-check-input">
+                               <label class="form-check-label" for="armed-fares">Armed Forces</label>
+                           </div>
+                   
+                           <div class="form-check">
+                               <input type="radio" id="student-fares" name="fare-type" value="student-fare" class="form-check-input">
+                               <label class="form-check-label" for="student-fares">Student Fares</label>
+                           </div>
+                   
+                           <div class="form-check">
+                               <input type="radio" id="senior-citizen" name="fare-type" value="senior-citizen" class="form-check-input">
+                               <label class="form-check-label" for="senior-citizen">Senior Citizen</label>
+                           </div>
+                   
+                           <div class="form-check">
+                               <input type="radio" id="doctors-fare" name="fare-type" value="doctors-fare" class="form-check-input">
+                               <label class="form-check-label" for="doctors-fare">Doctors & Nurses Fares</label>
+                           </div>
+                       </div>
+                   </div></center>
+                   
+       
+                   <!-- Search button -->
+                   <div class="d-flex justify-content-center" style="margin-top: 22px;">
+                       <input type="submit" class="btn btn-success" value="Search">
+                   </div>
+               </form>
+           </div> 
+       </div>
+       
+
+   
+    
+
+    <h4>Trending Offers</h4><br>
+    <center>
+<div class="container-card w-100" style="max-width:1160px;margin: auto;padding: 20px;">
+            <div class="custom-cards-container">
+                {% for i in res %}
+                <div class="custom-card card-{{ forloop.counter }}">
+                    {% if i.image %}
+                    <img src="{{ i.image }}" class="card-img" height="200px" width="150px" id="img">
+                    {% endif %}
+                    <div class="custom-card-content">
+                        <a href="{{ i.url }}" class="card-link"> 
+                            <div class="title-card" id="title">{{ i.title }}</div> 
+                            <div class="description-card" id="content">{{ i.content }}</div>
+                        
+                            <input type="button" value="Book Now" class="btn btn-sm btn-primary w-20" style="margin-top: -25px;">
+                        </a>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+          
+            <div class="fixed-carousel-nav">
+                
+                <div class="carousel-nav prev" href="#cardcarousel" role="button" data-slide="prev">
+                    <span class="bi bi-arrow-left-circle h3" style="color: brown; font-size: 35px;" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </div>
+                <div class="carousel-nav next" href="#cardcarousel" role="button" data-slide="next">
+                    <span class="bi bi-arrow-right-circle h3" style="color: brown; font-size: 35px;" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </div>
+    </div>
+    
+    
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var cardContainer = $(".custom-cards-container");
+                var cardWidth = cardContainer.find(".custom-card").outerWidth(true);
+                var totalWidth = cardWidth * $(".custom-card").length;
+                var animationDuration = 0; 
+                var intervalDelay = 3000; 
+                var autoScrollInterval; 
+      
+                function startAutoScroll() {
+                    autoScrollInterval = setInterval(function() {
+                        $(".next").click();
+                    }, intervalDelay);
+                }
+
+                
+      
+                function stopAutoScroll() {
+                    clearInterval(autoScrollInterval);
+                }
+      
+                $(".next").click(function() {
+                    cardContainer.stop().animate({
+                        scrollLeft: '+=' + cardWidth
+                    }, animationDuration, function() {
+                        if (cardContainer.scrollLeft() + cardContainer.width() >=8) {
+                            cardContainer.append($(".custom-card").first());
+                            cardContainer.scrollLeft(cardContainer.scrollLeft() - cardWidth);
+                        }
+                    });
+                });
+
+                
+      
+                $(".prev").click(function() {
+                    cardContainer.stop().animate({
+                        scrollLeft: '-=' + cardWidth
+                    }, animationDuration, function() {
+                        if (cardContainer.scrollLeft() <= 0) {
+                            cardContainer.prepend($(".custom-card").last());
+                            cardContainer.scrollLeft(cardContainer.scrollLeft() + cardWidth);
+                        }
+                    });
+                });
+      
+                $(".carousel-nav").hover(
+                    function() {
+                        stopAutoScroll();
+                    },
+                    function() {
+                        startAutoScroll();
+                    }
+                );
+      
+                startAutoScroll();
+          
+            });
+           
+        </script>
+       
+<script>
+    $(document).ready(function() {
+    var autoScrollInterval;
+
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(function() {
+            moveNext();
+        }, intervalDelay);
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+
+    function moveNext() {
+        cardContainer.stop().animate({
+            scrollLeft: '+=' + cardWidth
+        }, animationDuration, function() {
+            if (cardContainer.scrollLeft() + cardContainer.width() >= 8) {
+                cardContainer.append($(".custom-card").first());
+                cardContainer.scrollLeft(cardContainer.scrollLeft() - cardWidth);
+            }
+        });
+    }
+
+    function movePrev() {
+        cardContainer.stop().animate({
+            scrollLeft: '-=' + cardWidth
+        }, animationDuration, function() {
+            if (cardContainer.scrollLeft() <= 0) {
+                cardContainer.prepend($(".custom-card").last());
+                cardContainer.scrollLeft(cardContainer.scrollLeft() + cardWidth);
+            }
+        });
+    }
+
+    function setupCarousel() {
+        if ($(window).width() < 768) { // Adjust this breakpoint as needed
+            // Disable carousel behavior for small screens
+            $(".custom-card").css("flex", "0 0 auto");
+            $(".custom-cards-container").css("overflow-x", "auto");
+            $(".carousel-nav").hide(); // Hide navigation buttons
+            stopAutoScroll(); // Stop auto-scrolling
+        } else {
+            // Enable carousel behavior for larger screens
+            $(".custom-card").css("flex", "0 0 " + cardWidth + "px");
+            $(".custom-cards-container").css("overflow-x", "hidden");
+            $(".carousel-nav").show(); // Show navigation buttons
+            startAutoScroll(); // Start auto-scrolling
+        }
+    }
+
+    // Handle window resize to adjust carousel behavior
+    $(window).on("resize", function() {
+        setupCarousel();
+    });
+
+    // Handle next button click
+    $(".next").click(function() {
+        moveNext();
+    });
+
+    // Handle previous button click
+    $(".prev").click(function() {
+        movePrev();
+    });
+
+    // Handle swipe gestures using touch events
+    var touchStartX = 0;
+    var touchEndX = 0;
+    $(".custom-cards-container").on("touchstart", function(event) {
+        touchStartX = event.originalEvent.touches[0].pageX;
+    });
+
+    $(".custom-cards-container").on("touchend", function(event) {
+        touchEndX = event.originalEvent.changedTouches[0].pageX;
+        var touchDiff = touchStartX - touchEndX;
+
+        if (touchDiff > 50) {
+            // Swiped left
+            moveNext();
+        } else if (touchDiff < -50) {
+            // Swiped right
+            movePrev();
+        }
+    });
+
+    // Start initial setup
+    setupCarousel();
+});
+
+</script>
+        
+
+
+        <script>
+            $(document).ready(function() {
+             
+          
+              function setupCarousel() {
+                  cardWidth = $(".custom-card").outerWidth(true); // Update card width
+                 
+          
+                  if ($(window).width() < 768) {
+                      // Adjust for small screens (e.g., mobile devices)
+                      $(".custom-card").css({
+                          "flex": "0 0 auto",
+                          "width": "calc(50% - 10px)"
+                      });
+
+                    
+                      cardContainer.css();
+                      $(".carousel-nav").hide(); // Hide navigation buttons
+                      stopAutoScroll(); // Stop auto-scrolling
+                    } else {
+                      // Adjust for larger screens
+                     
+                      $(".carousel-nav").show(); // Show navigation buttons
+                      startAutoScroll(); // Start auto-scrolling
+                  }
+              }
+
+
+          
+              // Handle window resize to adjust carousel behavior
+              $(window).on("resize", function() {
+                  setupCarousel();
+              });
+          
+             
+          });
+          
+          </script>
+          
+   
+      </div>
+    </center>
+      <br> 
+      
+
+    <h4>Why you choose 'TEERDHA' for bookings?</h4>
+<br>
+
+
+{% for i in k %}
+    <div class="container mt-3" style="border: 1px solid black; border-radius: 10px;width:90% ;justify-content: center;"> 
+        <div class="row text-left">
+            <p id="op"><b>{{ i.question }}</b></p>
+            {% if forloop.counter == 12 %}
+              
+                <p style="margin-top: 35px;margin-left: -220px;">{{ i.answer}}</p>
+            {% else %}
+                <p>{{ i.answer }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+<br>
+
+
+
+<div class="container" style="width: 90%;justify-content: center;">
+    <h4><center>FAQ's on Flights</center></h4><br>
+    
+    <div class="faq-section">
+        {% for i in k3 %}
+        <div class="row question" onclick="toggleAnswer('{{ i.id }}')"> 
+            <div class="col-10 text-left h6" style='color:black'>                       
+                {{ i.question }}
+            </div>
+            <div class="col text-right" >
+                <i class="text-right fa fa-angle-down" style="font-size:20px"></i>
+            </div>
+            <div class="answer h6" id="answer{{i.id}}" style='color:rgb(87, 83, 83); text-align: justify;'>
+                {{ i.answer }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function toggleAnswer(id) {
+            var answer = document.getElementById("answer" + id);
+            var arrow = document.querySelector("#answer" + id + " + .question .fa-angle-down");
+
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+                arrow.style.transform = "rotate(0deg)";
+            } else {
+                answer.style.display = "block";
+                arrow.style.transform = "rotate(180deg)";
+            }
+        }
+    </script>
+
+
+</div> 
+       
+
+<script>
+    $('#cardcarousel').carousel({
+        infinite: true,
+          loop:true,
+  interval: 8000
+})
+
+$('.carousel .carousel-item').each(function(){
+    var minPerSlide = 3;
+    var next = $(this).next();
+    if (!next.length) {
+    next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+    
+    for (var i=0;i<minPerSlide;i++) {
+        next=next.next();
+        if (!next.length) {
+        	next = $(this).siblings(':first');
+      	}
+        
+        next.children(':first-child').clone().appendTo($(this));
+      }
+});
+
+
+// search bar script
+
+        function toggleReturnDate() {
+            var rtDate = document.getElementById('rtdate');
+            var twoWayRadio = document.getElementById('two_way');
+            rtDate.disabled = !twoWayRadio.checked;
+        }
+
+        function swapLocations() {
+            var fromInput = document.getElementById('fromid');
+            var toInput = document.getElementById('toid');
+            var temp = fromInput.value;
+            fromInput.value = toInput.value;
+            toInput.value = temp;
+        }
+
+</script> 
+  
+
+<br><br><br>
+ 
+
+
+</body>
+{% endblock %}
+</html>
+
+
+

@@ -30,14 +30,25 @@ class cab_update(generics.RetrieveUpdateDestroyAPIView):
     queryset=cab_cards.objects.all()
     serializer_class=cab_serialization
 
+#def cab_main(request):
+#    nav=navbar.objects.all()
+#    if request.method=="GET":
+#        ad=requests.get("http://127.0.0.1:8000/cab_insert/")
+#        res=ad.json()
+#        k3 = cabwhycontents.objects.all()
+ #       b = cab_faq.objects.all()
+ #       return render(request,"cab_templates/cabsearch.html",{'nav':nav,'res':res,'k3':k3,'b':b})
+
 def cab_main(request):
-    nav=navbar.objects.all()
     if request.method=="GET":
-        ad=requests.get("http://127.0.0.1:8000/cab_insert/")
-        res=ad.json()
+        #ad=requests.get("http://127.0.0.1:8000/cab_insert/")
+       # res=ad.json()
+        nav=navbar.objects.all()
+        res=cab_cards.objects.all()
         k3 = cabwhycontents.objects.all()
         b = cab_faq.objects.all()
         return render(request,"cab_templates/cabsearch.html",{'nav':nav,'res':res,'k3':k3,'b':b})
+  
   
 ############# 2nd page for 1st card ####################
 

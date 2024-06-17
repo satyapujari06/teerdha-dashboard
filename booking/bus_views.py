@@ -21,11 +21,21 @@ class bus_update(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+#def bus_main(request):
+#    if request.method=="GET":
+#        nav=navbar.objects.all()
+#        ad=requests.get("http://127.0.0.1:8000/bus_home/")
+#        res=ad.json()
+#        k2= bus_whychoose.objects.all()
+#       k1= bus_faq.objects.all()
+ #       return render(request,"bus_templates/d.html",{'nav':nav,'res':res,'k2':k2,'k1':k1})
+
 def bus_main(request):
     if request.method=="GET":
         nav=navbar.objects.all()
-        ad=requests.get("http://127.0.0.1:8000/bus_home/")
-        res=ad.json()
+       # ad=requests.get("http://127.0.0.1:8000/bus_home/")
+        res=bus_offercards.objects.all()
+        #res=ad.json()
         k2= bus_whychoose.objects.all()
         k1= bus_faq.objects.all()
         return render(request,"bus_templates/d.html",{'nav':nav,'res':res,'k2':k2,'k1':k1})

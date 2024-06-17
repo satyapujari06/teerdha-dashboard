@@ -69,16 +69,26 @@ def faq_home(request):
     return render(request,"flight_templates/flightfaq_table.html",{'k3': k3})  
 
 
+#def flights(request):
+#    if request.method=="GET":
+#        nav=navbar.objects.all()
+#        ad=requests.get("http://127.0.0.1:8000/flight_home/")
+#       res=ad.json()
+ #       k3 = flightfaqs.objects.all()
+ #       wc = requests.get("http://127.0.0.1:8000/why_choose_lc/")
+ #       wcu = wc.json()
+  #      k =choosing_content.objects.all()     
+  #      return render(request,"flight_templates/c.html",{'nav':nav,'res':res,'k3':k3,'wcu':wcu,'k':k})
+
 def flights(request):
     if request.method=="GET":
         nav=navbar.objects.all()
-        ad=requests.get("http://127.0.0.1:8000/flight_home/")
-        res=ad.json()
-        k3 = flightfaqs.objects.all()
-        wc = requests.get("http://127.0.0.1:8000/why_choose_lc/")
-        wcu = wc.json()
-        k =choosing_content.objects.all()     
-        return render(request,"flight_templates/c.html",{'nav':nav,'res':res,'k3':k3,'wcu':wcu,'k':k})
+        res=flights_offercards.objects.all() #ad.json()
+        rest=faqs.objects.all() #k.json()
+        wcu =why_choose.objects.all() # wc.json()
+        wch =choosing_content.objects.all() # ch.json()      
+        return render(request,"flight_templates/c.html",{'nav':nav,'res':res,'rest':rest,'wcu':wcu,'wch':wch})
+
 
 
 class kotak_api(generics.ListCreateAPIView):

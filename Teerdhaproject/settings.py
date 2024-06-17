@@ -27,7 +27,7 @@ DEBUG = True
 
 CSRF_TRUSTED_ORIGINS=['https://c8e1-139-167-50-98.ngrok-free.app/']
 
-ALLOWED_HOSTS = ['c8e1-139-167-50-98.ngrok-free.app','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['*','c8e1-139-167-50-98.ngrok-free.app','localhost','127.0.0.1']
 
 
 # Application definition
@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'Teerdhaproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'booking_up',
+        'NAME':'book',
         'POST':'3306',
-        'PASSWORD':'',
+        'PASSWORD':'admin1234567',
         'HOST':'localhost',
-        'USER':'root'
+        'USER':'admin'
     }
 }
 

@@ -7,17 +7,29 @@ from django.http import HttpResponse
 
 
 # Create your views here.
+#def hotelform(request):
+#    k=hotel_quary.objects.all()
+#   k1=hotel_faqitem.objects.all()
+#    nav=navbar.objects.all()
+#    if request.method=="GET":
+ #       cl=requests.get("http://127.0.0.1:8000/cardsapi/")
+ #       res=cl.json()
+    
+  #      return render(request,"hotel_templates/searchform.html",{'nav':nav,'res':res,'k':k,'k1':k1})
+        # return render(request,"hotel_templates/form.html",{'res':res})
+
 def hotelform(request):
     k=hotel_quary.objects.all()
-    k1=hotel_faqitem.objects.all()
+    kl=hotel_faqitem.objects.all()
     nav=navbar.objects.all()
 
     if request.method=="GET":
-        cl=requests.get("http://127.0.0.1:8000/cardsapi/")
-        res=cl.json()
-    
-        return render(request,"hotel_templates/searchform.html",{'nav':nav,'res':res,'k':k,'k1':k1})
+        #cl=requests.get("http://127.0.0.1:8000/cardsapi/")
+       # res=cl.json()
+        res=hotel_cards.objects.all()
+        return render(request,"hotel_templates/searchform.html",{'nav':nav,'res':res,'k':k,'kl':kl})
         # return render(request,"hotel_templates/form.html",{'res':res})
+
 
 class cardsapi(generics.ListCreateAPIView):
     queryset=hotel_cards.objects.all()
